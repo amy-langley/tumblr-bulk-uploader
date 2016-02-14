@@ -4,7 +4,7 @@
   "description": "A command-line tool for bulk-uploading images to tumblr.",
   "main": "index.js",
   "bin": {
-    "tumblr-bulk-upload": "./index.js"
+    "tumblr-bulk-uploader": "./index.js"
   },
   "repository": {
     "type": "git",
