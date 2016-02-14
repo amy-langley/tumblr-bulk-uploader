@@ -3,6 +3,9 @@ var fs = require('fs')
 var path = require('path')
 var app = require('commander')
 var tumblr = require('tumblr')
+var jsonfile = require('jsonfile');
+
+var consumerInfo = jsonfile.readFileSync(path.join(__dirname, './consumer.json'))
 
 app
   .arguments('<directory')
