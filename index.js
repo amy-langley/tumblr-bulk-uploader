@@ -68,7 +68,7 @@ function authenticate(andThen){
 }
 
 function simple() {
-  var tumb = new t2({consumerKey: app.consumer_key})
+  var tumb = new t2({consumerKey: app.consumer_key, consumerSecret: app.consumer_secret})
   tumb.get('/info', {hostname: 'aetherstragic.tumblr.com'}, function(err, json){
     console.log(err)
     console.log(json)
