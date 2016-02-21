@@ -23,7 +23,6 @@
     "jsonfile": "^2.2.3",
     "oauth": "^0.9.14",
     "progress": "^1.1.8",
-    "tumblr": "^0.4.1",
-    "tumblrwks": "^0.3.0"
+    "tumblr.js": "0.0.7"
   }
 }
