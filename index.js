@@ -11,6 +11,7 @@ var tumblr = require('tumblr.js')
 app
   .arguments('<directory')
   .option('-u, --username <username>')
+  .option('-b, --blog <blog>')
   .option('-t, --tag <tag>')
   .action(function(directory){
     co(function* (){
@@ -20,10 +21,8 @@ app
 
       app.credentials = Object.assign({}, consumerInfo, token)
 
-      // if(!app.username)
-        // app.username = yield prompt('username: ')
-
-      // app.password = yield prompt.password('password: ')
+      if(!app.blog)
+        app.blog = yield prompt('blog: ')
 
       processDirectory(directory)
     })
@@ -45,7 +44,7 @@ function postPhoto(path){
   }
 
   opts = Object.assign({}, opts, {data: path})
-  app.client.photo('aetherstragic', opts, (err,data) => {
+  app.client.photo(app.blog, opts, (err,data) => {
     var message = err?
       'Failed to upload file ' + path :
       'Uploaded ' + path
