@@ -8,7 +8,6 @@ var prompt = require('co-prompt')
 var oauth = require('oauth')
 var tumblr = require('tumblr.js')
 
-
 app
   .arguments('<directory')
   .option('-u, --username <username>')
@@ -21,14 +20,12 @@ app
 
       app.credentials = Object.assign({}, consumerInfo, token)
 
-      if(!app.username)
-        app.username = yield prompt('username: ')
+      // if(!app.username)
+        // app.username = yield prompt('username: ')
 
-      app.password = yield prompt.password('password: ')
+      // app.password = yield prompt.password('password: ')
 
-      // processDirectory(directory)
-      // authenticate()
-      try{ simple() } catch(x) { console.log(x) }
+      processDirectory(directory)
     })
   })
   .parse(process.argv)
@@ -36,20 +33,23 @@ app
 function processDirectory(directory){
   fs.readdir(directory, function(err, files){
     for(file of files)
-      uploadFile(path.join(directory,file))
+      postPhoto(path.join(directory,file))
   })
 }
 
-function uploadFile(path){
-  console.log(path)
-}
+function postPhoto(path){
+  app.client = app.client || tumblr.createClient(app.credentials)
+  var opts = {
+    state: 'queue',
+    tags: 'testing',
+  }
 
-function simple() {
-  // console.log(app.credentials)
-  var client = tumblr.createClient(app.credentials);
+  opts = Object.assign({}, opts, {data: path})
+  app.client.photo('aetherstragic', opts, (err,data) => {
+    var message = err?
+      'Failed to upload file ' + path :
+      'Uploaded ' + path
 
-  // Make the request
-  client.userInfo(function (err, data) {
-    console.log(data)
-  });
+    console.log(message)
+  })
 }
