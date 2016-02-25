@@ -15,10 +15,8 @@ app
   .option('-t, --tag <tag>')
   .action(function(directory){
     co(function* (){
-
       var consumerInfo = jsonfile.readFileSync(path.join(__dirname, './consumer.json'))
       var token = jsonfile.readFileSync(path.join(__dirname, './token.json'))
-
       app.credentials = Object.assign({}, consumerInfo, token)
 
       if(!app.blog)
@@ -38,12 +36,8 @@ function processDirectory(directory){
 
 function postPhoto(path){
   app.client = app.client || tumblr.createClient(app.credentials)
-  var opts = {
-    state: 'queue',
-    tags: 'testing',
-  }
 
-  opts = Object.assign({}, opts, {data: path})
+  var opts = Object.assign({}, { state: 'queue', tags: 'testing' }, {data: path})
   app.client.photo(app.blog, opts, (err,data) => {
     var message = err?
       'Failed to upload file ' + path :
