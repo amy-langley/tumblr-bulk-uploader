@@ -19,7 +19,7 @@ Obtain your tokens from the Tumblr API at https://api.tumblr.com/console/calls/u
 
 ```
 {
-  "token" : "9ELIkFO2pY7tpjS2NXDsIb4ebSEVS5dXcRSCrEMJR1yuZfM4Co",
-  "token_secret" : "4PQ5LTGF9He6WrbsOyZ48vyZH4vhdPHu7lmWkFFrf8GLRPjvvd"
+  "token" : "your value here",
+  "token_secret" : "your value here"
 }
 ```
